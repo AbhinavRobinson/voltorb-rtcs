@@ -1,6 +1,7 @@
 pub mod model;
+pub mod proto;
 
-use anyhow::{Result, Ok};
+use anyhow::{Ok, Result};
 
 fn main() -> Result<()> {
     println!("Voltorb!");
