@@ -1,14 +1,11 @@
 #[derive(Debug)]
 pub struct User {
-    pub id: String,
+    pub id: usize,
     pub username: String,
 }
 
 impl User {
-    pub fn new(username: String) -> User {
-        User {
-            id: '1'.into(),
-            username,
-        }
+    pub fn new(id: usize, username: String) -> User {
+        User { id, username }
     }
 }
