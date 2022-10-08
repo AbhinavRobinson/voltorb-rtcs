@@ -12,8 +12,16 @@ fn main() -> Result<()> {
         global_id.fetch_add(1, Ordering::Relaxed),
         AtomicUsize::new(1),
     );
-    let message = Message::new(channel.get_id(), channel.id, "Hello World!".into());
-    let user = User::new(channel.get_id(), channel.id, "Abhinav Robinson".into());
+    let message = Message::new(
+        channel.get_id().expect("Error creating ID."),
+        channel.id,
+        "Hello World!".into(),
+    );
+    let user = User::new(
+        channel.get_id().expect("Error creating ID."),
+        channel.id,
+        "Abhinav Robinson".into(),
+    );
     println!("{} says {}", user.username, message.body);
     println!("{:?}", message);
     Ok(())

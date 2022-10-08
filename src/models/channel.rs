@@ -1,3 +1,4 @@
+use anyhow::Result;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 use super::{message::Message, user::User};
@@ -19,7 +20,10 @@ impl Channel {
             id_manager,
         }
     }
-    pub fn get_id(&self) -> usize {
-        self.id_manager.fetch_add(1, Ordering::Relaxed)
+    pub fn get_id(&self) -> Result<usize> {
+        Ok(self.id_manager.fetch_add(1, Ordering::Relaxed))
+    }
+    pub fn add_users(&mut self, user: User) -> Result<()> {
+        Ok(self.users.push(user))
     }
 }
