@@ -26,4 +26,10 @@ impl Channel {
     pub fn add_users(&mut self, user: User) -> Result<()> {
         Ok(self.users.push(user))
     }
+    pub fn add_messages(&mut self, message: Message) -> Result<()> {
+        Ok(self.messages.push(message))
+    }
+    pub fn edit_message(&mut self, _message: Message) -> Result<Message> {
+        todo!()
+    }
 }
