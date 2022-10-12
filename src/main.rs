@@ -1,14 +1,12 @@
 pub mod models;
 
-use std::sync::atomic::{AtomicUsize, Ordering};
-
-use anyhow::{Ok, Result};
-
 use crate::models::{channel::Channel, message::Message, user::User};
+use anyhow::{Ok, Result};
+use std::sync::atomic::{AtomicUsize, Ordering};
 
 fn main() -> Result<()> {
     let global_id = AtomicUsize::new(1);
-    let channel = Channel::new(
+    let mut channel = Channel::new(
         global_id.fetch_add(1, Ordering::Relaxed),
         AtomicUsize::new(1),
     );
@@ -22,7 +20,14 @@ fn main() -> Result<()> {
         channel.id,
         "Abhinav Robinson".into(),
     );
-    println!("{} says {}", user.username, message.body);
-    println!("{:?}", message);
+    let chat_result = channel.add_users(user).is_ok();
+    let message_result = channel.add_messages(message).is_ok();
+    if chat_result && message_result {
+        println!(
+            "{} says {}",
+            channel.users[0].username, channel.messages[0].body
+        );
+        println!("{:?}", channel);
+    }
     Ok(())
 }

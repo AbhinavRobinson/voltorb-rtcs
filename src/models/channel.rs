@@ -33,3 +33,8 @@ impl Channel {
         todo!()
     }
 }
+
+//#[test]
+//pub fn channel_tests() {
+//    let channel = Channel::new(1, AtomicUsize::new(1));
+//}
